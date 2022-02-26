@@ -41,15 +41,15 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
       const stockAmount = stock.data.amount;
       const currentAmount = productExists ? productExists.amount : 0;
-      const amount = currentAmount + 1;
+      const updatedAmount = currentAmount + 1;
 
-      if (amount > stockAmount) {
+      if (updatedAmount > stockAmount) {
         toast.error('Quantidade solicitada fora de estoque');
         return;
       }
 
       if (productExists) {
-        productExists.amount = amount;
+        productExists.amount = updatedAmount;
       } else {
         const product = await api.get(`/products/${productId}`);
 
